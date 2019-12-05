@@ -2,7 +2,8 @@
 
 module Enumerable
   def m_each
-    return self unless block_given?
+  return self unless block_given?
+  
     i = 0
     while i < length
       yield(self[i])
