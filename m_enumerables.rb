@@ -33,10 +33,11 @@ module Enumerable
 
   def m_all?(pattern = nil)
     i = 0
-    while i < length
-     return false if block_given? && !yield(self[i])
-     return false if pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
-     return false if !self[i]
+    ans = true
+    while i < length || ans = true
+     ans = false if block_given? && !yield(self[i])
+     ans = false if pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
+     ans = false if !self[i]
 
      i += 1
     end
@@ -48,5 +49,3 @@ module Enumerable
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
-
-puts [1.4, "2.13""", 3].m_all?(Numeric)
