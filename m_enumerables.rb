@@ -37,7 +37,14 @@ module Enumerable
      return false if block_given? && !yield(self[i])
      return false if !self[i]
 
-     end
+     i += 1
     end
+    return true
   end
+
+  def m_any?
+    return !self.m_all? {yield(self)} if block_given?
+    return !m_all?
+  end
+
 end
