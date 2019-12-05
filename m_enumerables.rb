@@ -35,9 +35,9 @@ module Enumerable
     i = 0
     while i < length
       if block_given?
-        return false if !yield(self[i])
-      else
-        return false if !self[i]
+        return false unless !yield(self[i])
+      elsif !self[i]
+        return false
       end
     end
   end
