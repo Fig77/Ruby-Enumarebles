@@ -31,14 +31,16 @@ module Enumerable
     end
   end
 
-  def m_all?(*args)
+  def m_all?(pattern = nil)
     i = 0
     while i < length
      return false if block_given? && !yield(self[i])
-     return false if !self[i] || !(self[i] === args) # rubocop:disable Style/CaseEquality
+     return false if pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
+     return false if !self[i]
 
      i += 1
     end
+
     true
   end
 
@@ -46,3 +48,5 @@ module Enumerable
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
+
+puts [1.4, "2.13""", 3].m_all?(Numeric)
