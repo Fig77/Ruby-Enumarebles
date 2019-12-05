@@ -34,10 +34,8 @@ module Enumerable
   def m_all?
     i = 0
     while i < length
-     return false  if block_given? && !yield(self[i])
-
-     elsif !self[i]
-      return false
+     return false if block_given? && !yield(self[i])
+     return false if !self[i]
 
      end
     end
