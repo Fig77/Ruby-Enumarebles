@@ -26,6 +26,7 @@ module Enumerable
 
     new_vector = []
     i = 0
-    while i < length new_vector.push(self[i]) if yield(self[i])
+    while i < length 
+      new_vector.push(self[i]) if yield(self[i])
   end
 end
