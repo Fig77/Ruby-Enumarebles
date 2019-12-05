@@ -31,6 +31,7 @@ module Enumerable
     end
   end
 
+
   def m_all?(*args)
     i = 0
     while i < length
