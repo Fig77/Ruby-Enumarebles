@@ -20,4 +20,15 @@ module Enumerable
       i += 1
     end
   end
+
+  def m_select
+    return self unless block_given?
+
+    new_vector = []
+    i = 0
+    while i < length
+      new_vector.push(self[i]) if yield(self[i])
+    end
+    return new_vector
+  end
 end
