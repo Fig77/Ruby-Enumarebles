@@ -44,6 +44,5 @@ module Enumerable
 
   def m_any?
     block_given? ? !m_all? { yield(self) } : !m_all?
-
   end
 end
