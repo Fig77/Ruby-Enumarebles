@@ -3,6 +3,7 @@
 module Enumerable
   def m_each
     return self unless block_given?
+    
 		  i = 0
 		  while i < self.length
 			  yield(self[i])
