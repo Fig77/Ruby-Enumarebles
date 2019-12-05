@@ -28,5 +28,18 @@ module Enumerable
     i = 0
     while i < length 
       new_vector.push(self[i]) if yield(self[i])
+    end
+  end
+
+  def m_all?
+    i = 0
+    while i < length
+      if block_given?
+        return false if !yield(self[i])
+      else
+        return false if !self[i]
+      end
+    end
+    return true
   end
 end
