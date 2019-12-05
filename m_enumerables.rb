@@ -39,12 +39,11 @@ module Enumerable
 
      i += 1
     end
-    return true
   end
 
   def m_any?
-    return !self.m_all? {yield(self)} if block_given?
+    return !m_all? { yield(self) } if block_given?
     return !m_all?
-  end
 
+  end
 end
