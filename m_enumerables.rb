@@ -31,7 +31,7 @@ module Enumerable
     end
   end
 
-  def m_all?(*args) # rubocop:disable Style/CaseEquality  
+  def m_all?(*args) # rubocop:disable Style/UnusedMethodArgument
     i = 0
     while i < length
      return false if block_given? && !yield(self[i])
@@ -42,7 +42,7 @@ module Enumerable
     true
   end
 
-  def m_any?(*args) # rubocop:disable Style/CaseEquality 
+  def m_any?(*args) # rubocop:disable Style/UnusedMethodArgument 
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
