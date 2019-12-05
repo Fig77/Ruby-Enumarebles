@@ -31,18 +31,20 @@ module Enumerable
     end
   end
 
-  def m_all?(*)
+  def m_all?(*a)
     i = 0
     while i < length
      return false if block_given? && !yield(self[i])
-     return false if !self[i] || !(self[i] === args) # rubocop:disable Style/CaseEquality
+     return false if !self[i] || !(self[i] === a) # rubocop:disable Style/CaseEquality
 
      i += 1
     end
     true
   end
 
-  def m_any?(*)
+  def m_any?(*a)
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
+
+puts %w[ant bear cat].m_all?(/t/)
