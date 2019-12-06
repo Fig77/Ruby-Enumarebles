@@ -56,7 +56,6 @@ module Enumerable
     ans
   end
 
-  # not implemented untill none.
   def m_any?(args = nil)
     if block_given?
       return true unless m_all?(nil, true) { yield(self) }
@@ -69,5 +68,21 @@ module Enumerable
 
   def m_none?(args = nil)
     block_given? ? m_all?(args, true) { yield(self) } : m_all?(args, true)
+  end
+
+  def m_count(arg = nil)
+    cant = 0
+    i = 0
+    while i < length
+      if block_given?
+        cant += 1 if yield(self[i])
+      elsif !arg.nil?
+        cant += 1 if self[i] == arg
+      else
+        cant += 1
+      end
+      i += 1
+    end
+    cant
   end
 end
