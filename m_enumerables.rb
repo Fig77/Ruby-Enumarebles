@@ -85,4 +85,17 @@ module Enumerable
     end
     cant
   end
+
+  def m_map
+    new_arr = []
+    aux = self.to_a
+    return aux unless block_given?
+
+    aux.m_each { | i | new_arr.push(yield(i)) }
+    new_arr
+  end
 end
+
+print (1..4).m_map { |i| i*i }      #=> [1, 4, 9, 16]
+print (1..4).m_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
+print (1..7).m_map
