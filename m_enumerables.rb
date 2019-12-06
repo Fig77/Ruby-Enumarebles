@@ -40,7 +40,7 @@ module Enumerable
     !bol
   end
 
-  def m_all?(pattern = nil, bol = false)
+  def m_all?(pattern = nil, bol = false) # bol makes this re-usable with any? and none?
     i = 0
     ans = true
     while i < length
@@ -94,4 +94,26 @@ module Enumerable
     aux.m_each { |i| new_arr.push(yield(i)) }
     new_arr
   end
+
+  def m_inject(sum = 0, arg = nil)
+    aux = to_a
+    sum = aux[0] if sum == 0
+    arg.to_sym unless arg == nil
+    if arg.is_a? Symbol 
+       aux.m_each { |i| sum = sum.send(arg, i) }
+    elsif block_given?
+      aux.m_each { |i| sum = (yield(sum, i)) }
+    else
+      return aux 
+    end
+
+    sum
+  end
 end
+
+puts (5..10).m_inject { |sum, n| sum + n } 
+puts (5..10).m_inject(1, :*)
+longest = %w{ cat sheep bear }.m_inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
+puts longest
