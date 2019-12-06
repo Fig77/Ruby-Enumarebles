@@ -36,13 +36,9 @@ module Enumerable
     ans = true
     while i < length
       ans = false
-      if !self[i]
-        i = length
-      elsif block_given? && !yield(self[i])
-        i = length
-      elsif pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
-        i = length
-      end
+      break if !self[i]
+      break !yield(self[i])
+      break pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
       ans = true
       i += 1
     end
@@ -53,3 +49,4 @@ module Enumerable
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
+.
