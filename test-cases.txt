@@ -4,3 +4,10 @@ puts [1, 2i, 3.14].m_all?(Numeric)
 puts %w[ant bear cat].m_all?(/t/)
 puts %w[ant bear cat].m_all? { |word| word.length >= 4 }
 puts %w[ant bear cat].m_all? { |word| word.length >= 3 }
+
+//NONE
+puts [1, 3.14, 42].none?(Float)
+puts [].m_none?
+puts [nil].m_none?
+puts [nil, false].m_none?
+puts [nil, false, true].m_none?

@@ -31,22 +31,24 @@ module Enumerable
     end
   end
 
-  def all_auxiliar?(arg, pattern = nil)
-    return false unless arg
-    return false if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
+  # this function is just to reduce cyclomatic complexity.
 
-    true
+  def all_auxiliar?(arg, pattern = nil, bol = false)
+    return bol unless arg
+    return bol if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
+
+    !bol
   end
 
-  def m_all?(pattern = nil)
+  def m_all?(pattern = nil, bol = false)
     i = 0
     ans = true
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
       if block_given?
-        break unless all_auxiliar?(yield(self[i]))
+        break unless all_auxiliar?(yield(self[i]), nil, bol)
       end
-      break unless all_auxiliar?(self[i], pattern)
+      break unless all_auxiliar?(self[i], pattern, bol)
 
       ans = true
       i += 1
@@ -54,7 +56,12 @@ module Enumerable
     ans
   end
 
+  # not implemented untill none.
   def m_any?(*args) # rubocop:disable Style/UnusedMethodArgument
     block_given? ? !m_all? { yield(self) } : !m_all?
+  end
+
+  def m_none?(*args) # rubocop:disable Style/UnusedMethodArgument
+    block_given? ? m_all?(nil, true) { yield(self) } : m_all?(nil, true)
   end
 end
