@@ -88,10 +88,10 @@ module Enumerable
 
   def m_map
     new_arr = []
-    aux = self.to_a
+    aux = to_a
     return aux unless block_given?
 
-    aux.m_each { | i | new_arr.push(yield(i)) }
+    aux.m_each {| i | new_arr.push(yield(i))}
     new_arr
   end
 end
