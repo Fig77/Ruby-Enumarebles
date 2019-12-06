@@ -86,8 +86,3 @@ module Enumerable
     return cant
   end
 end
-
-ary = [1, 2, 4, 2]
-puts ary.m_count               #=> 4
-puts ary.m_count(2)            #=> 2
-puts ary.m_count{ |x| x%2==0 } #=> 3
