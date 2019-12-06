@@ -57,7 +57,7 @@ module Enumerable
   end
 
   # not implemented untill none.
-  def m_any?(args = nil) # rubocop:disable Style/UnusedMethodArgument
+  def m_any?(args = nil)
     if block_given?
       return true unless m_all?(nil, true) { yield(self) }
     else
@@ -67,20 +67,7 @@ module Enumerable
     false
   end
 
-  def m_none?(args = nil) # rubocop:disable Style/UnusedMethodArgument
+  def m_none?(args = nil)
     block_given? ? m_all?(args, true) { yield(self) } : m_all?(args, true)
   end
 end
-
-puts [1, 3.14, 42].none?(Float)
-puts [].m_none?
-puts [nil].m_none?
-puts [nil, false].m_none?
-puts [nil, false, true].m_none?
-
-puts %w[ant bear cat].m_any? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].m_any? { |word| word.length >= 4 } #=> true
-puts %w[ant bear cat].m_any?(/d/)                        #=> false
-puts [nil, true, 99].m_any?(Integer)                     #=> true
-puts [nil, true, 99].m_any?                              #=> true
-puts [].m_any?                                           #=> false
