@@ -85,4 +85,13 @@ module Enumerable
     end
     cant
   end
+
+  def m_map
+    new_arr = []
+    aux = to_a
+    return aux unless block_given?
+
+    aux.m_each { |i| new_arr.push(yield(i)) }
+    new_arr
+  end
 end
