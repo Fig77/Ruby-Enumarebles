@@ -83,6 +83,6 @@ module Enumerable
       end
       i += 1
     end
-    return cant
+    cant
   end
 end
