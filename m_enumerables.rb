@@ -37,11 +37,13 @@ module Enumerable
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
       break unless self[i]
+
       if block_given?
-        ans = yield(self[i]) 
+        ans = yield(self[i])
         break
       end
       break if !pattern.nil? && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
+
       ans = true
       i += 1
     end
