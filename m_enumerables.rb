@@ -57,11 +57,17 @@ module Enumerable
   end
 
   # not implemented untill none.
-  def m_any?(*args) # rubocop:disable Style/UnusedMethodArgument
-    block_given? ? !m_all? { yield(self) } : !m_all?
+  def m_any?(args = nil)
+    if block_given?
+      return true unless m_all?(nil, true) { yield(self) }
+    else
+      return true unless m_all?(args, true)
+    end
+
+    false
   end
 
-  def m_none?(*args) # rubocop:disable Style/UnusedMethodArgument
-    block_given? ? m_all?(nil, true) { yield(self) } : m_all?(nil, true)
+  def m_none?(args = nil)
+    block_given? ? m_all?(args, true) { yield(self) } : m_all?(args, true)
   end
 end
