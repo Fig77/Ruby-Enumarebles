@@ -32,7 +32,7 @@ module Enumerable
   end
 
   def all_auxiliar?(arg, pattern = nil)
-    return false unless arg 
+    return false unless arg
     return false if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
 
     true
@@ -47,6 +47,7 @@ module Enumerable
         break unless all_auxiliar?(yield(self[i]))
       end
       break unless all_auxiliar?(self[i], pattern)
+
       ans = true
       i += 1
     end
