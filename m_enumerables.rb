@@ -95,7 +95,3 @@ module Enumerable
     new_arr
   end
 end
-
-print (1..4).m_map { |i| i*i }      #=> [1, 4, 9, 16]
-print (1..4).m_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
-print (1..7).m_map
