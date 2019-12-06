@@ -31,15 +31,23 @@ module Enumerable
     end
   end
 
-  def m_all?(*args)
+  def m_all?(pattern = nil)
     i = 0
+    ans = true
     while i < length
-     return false if block_given? && !yield(self[i])
-     return false if !self[i] || !(self[i] === args) # rubocop:disable Style/CaseEquality
+      ans = false # rubocop:disable Lint/UselessAssignment
+      break unless self[i]
 
-     i += 1
+      if block_given?
+        ans = yield(self[i])
+        break
+      end
+      break if !pattern.nil? && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
+
+      ans = true
+      i += 1
     end
-    true
+    ans
   end
 
   def m_any?(*args) # rubocop:disable Style/UnusedMethodArgument
