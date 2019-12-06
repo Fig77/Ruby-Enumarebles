@@ -31,18 +31,22 @@ module Enumerable
     end
   end
 
+  def all_auxiliar?(arg, pattern = nil)
+    return false unless arg
+    return false if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
+
+    true
+  end
+
   def m_all?(pattern = nil)
     i = 0
     ans = true
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
-      break unless self[i]
-
       if block_given?
-        ans = yield(self[i])
-        break
+        break unless all_auxiliar?(yield(self[i]))
       end
-      break if !pattern.nil? && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
+      break unless all_auxiliar?(self[i], pattern)
 
       ans = true
       i += 1
