@@ -37,11 +37,11 @@ module Enumerable
     while i < length
       ans = false
       if !self[i]
-        break
+        i = length
       elsif block_given? && !yield(self[i])
-        break
+        i = length
       elsif pattern != nil && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
-        break
+        i = length
       end
       ans = true
       i += 1
