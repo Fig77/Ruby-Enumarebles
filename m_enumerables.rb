@@ -31,19 +31,21 @@ module Enumerable
     end
   end
 
+  def shitIsfalse?(arg, pattern = nil)
+    return false if !arg 
+    return false if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
+    return true
+  end
+
   def m_all?(pattern = nil)
     i = 0
     ans = true
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
-      break unless self[i]
-
       if block_given?
-        ans = yield(self[i])
-        break
+        break if !shitIsfalse?(yield(self[i]))
       end
-      break if !pattern.nil? && !(pattern === self[i]) # rubocop:disable Style/CaseEquality
-
+      break if !shitIsfalse?(self[i], pattern)
       ans = true
       i += 1
     end
@@ -54,3 +56,4 @@ module Enumerable
     block_given? ? !m_all? { yield(self) } : !m_all?
   end
 end
+
