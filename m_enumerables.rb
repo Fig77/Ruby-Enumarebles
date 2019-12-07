@@ -95,14 +95,17 @@ module Enumerable
     new_arr
   end
 
-  def m_inject(sum = 0, arg = nil)
+  def m_inject(sum = nil, arg = nil)
     aux = to_a
-    sum = aux[0] if sum == 0
     arg.to_sym unless arg == nil
+    if !sum
+      sum = aux[0]
+      aux = aux.drop(1)
+    end
     if arg.is_a? Symbol 
        aux.m_each { |i| sum = sum.send(arg, i) }
     elsif block_given?
-      aux.m_each { |i| sum = (yield(sum, i)) }
+       aux.m_each { |i| sum = (yield(sum, i)) }
     else
       return aux 
     end
@@ -111,8 +114,7 @@ module Enumerable
   end
 end
 
-puts (5..10).m_inject { |sum, n| sum + n } 
-puts (5..10).m_inject(1, :*)
+puts [2,4,5].m_inject(nil, :+)
 longest = %w{ cat sheep bear }.m_inject do |memo, word|
    memo.length > word.length ? memo : word
 end
