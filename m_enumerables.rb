@@ -113,9 +113,3 @@ module Enumerable
     sum
   end
 end
-
-puts [2,4,5].m_inject(nil, :+)
-longest = %w{ cat sheep bear }.m_inject do |memo, word|
-   memo.length > word.length ? memo : word
-end
-puts longest
