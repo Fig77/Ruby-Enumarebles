@@ -37,7 +37,7 @@ module Enumerable
   def all_auxiliar?(arg, pattern = nil, bol = false)
     return bol unless arg
     return bol if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
-
+     
     !bol
   end
 
@@ -50,8 +50,9 @@ module Enumerable
       ans = false # rubocop:disable Lint/UselessAssignment
       if block_given?
         break unless all_auxiliar?(yield(self[i]), nil, bol)
+      else
+        break unless all_auxiliar?(self[i], pattern, bol)
       end
-      break unless all_auxiliar?(self[i], pattern, bol)
 
       ans = true
       i += 1
@@ -124,3 +125,11 @@ module Enumerable
   # 12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
   #     previus point.
 end
+puts %w{ant bear cat}.m_none? { |word| word.to_s.length == 5 } #=> true
+puts %w{ant bear cat}.m_none? { |word| word.to_s.length >= 4 } #=> false
+puts %w{ant bear cat}.m_none?(/d/)                        #=> true
+puts [1, 3.14, 42].m_none?(Float)                         #=> false
+puts [].m_none?                                           #=> true
+puts [nil].m_none?                                        #=> true
+puts [nil, false].m_none?                                 #=> true
+puts [nil, false, true].m_none?                           #=> false
