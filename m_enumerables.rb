@@ -22,16 +22,14 @@ module Enumerable
   end
 
   def m_select
-  	to_a
     return self unless block_given?
 
     new_vector = []
     i = 0
-    while i < length 
+    while i < length
       new_vector.push(self[i]) if yield(self[i])
       i += 1
     end
-    new_vector
   end
 
   # this function is just to reduce cyclomatic complexity.
@@ -118,13 +116,11 @@ module Enumerable
     sum
   end
 
-=begin
-	Regarding points 11, 12, 13. As far as I can understand, they are redundant.
-	11. Creating a method  multiply_els([2,4,5]) to test my_inject is straight up using inject, but 
-			calling the method inside this new method.
-	11. Modify your #my_map method to take a proc instead is also redundant since you can just pass
-			a proc to the original method by using &proc as an argument.
-	12. Modify your #my_map method to take either a proc or a block, also seems redundant given the 
-			previus point.
-=end
+  #Regarding points 11, 12, 13. As far as I can understand, they are redundant.
+  #11. Creating a method  multiply_els([2,4,5]) to test my_inject is straight up using inject, but 
+  #    calling the method inside this new method.
+  #11. Modify your #my_map method to take a proc instead is also redundant since you can just pass
+  #    a proc to the original method by using &proc as an argument.
+  #12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
+  #    previus point.
 end
