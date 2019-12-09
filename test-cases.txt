@@ -1,3 +1,11 @@
+Test cases.
+
+//m_select
+puts (1..10).m_select { |i|  i % 3 == 0 }   #=> [3, 6, 9]
+puts [1,2,3,4,5].m_select { |num|  num.even?  }   #=> [2, 4]
+puts [:foo, :bar].m_select { |x| x == :foo }   #=> [:foo]
+
+//m_all?
 puts [].m_all?
 puts [nil, true, 99].m_all?
 puts [1, 2i, 3.14].m_all?(Numeric)
@@ -5,9 +13,38 @@ puts %w[ant bear cat].m_all?(/t/)
 puts %w[ant bear cat].m_all? { |word| word.length >= 4 }
 puts %w[ant bear cat].m_all? { |word| word.length >= 3 }
 
-//NONE
+//m_any?
+%w[ant bear cat].any? { |word| word.length >= 3 }
+%w[ant bear cat].any? { |word| word.length >= 4 }
+%w[ant bear cat].any?(/d/)                        
+[nil, true, 99].any?(Integer)                    
+[nil, true, 99].any?                             
+[].any?                                           
+
+//m_none?
 puts [1, 3.14, 42].none?(Float)
 puts [].m_none?
 puts [nil].m_none?
 puts [nil, false].m_none?
 puts [nil, false, true].m_none?
+
+//m_count
+ary = [1, 2, 4, 2]
+ary.count               
+ary.count(2)            
+ary.count{ |x| x%2==0 } 
+
+//m_map
+(1..4).m_map { |i| i*i } WITH BLOCK
+(1..4).m_map { "cat"  } WITH BLOCK
+proc = Proc.new { |i| i*i } -> (1..4).m_map(&proc) WITH PROC
+
+//m_inject
+(5..10).m_inject(:+)                             
+(5..10).m_inject { |sum, n| sum + n }
+(5..10).m_inject(1, :*)                       
+(5..10).m_inject(1) { |product, n| product * n }
+[2,4,5].m_inject(1, :*) POINT NUMBER 10
+longest = %w{ cat sheep bear }.m_inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
