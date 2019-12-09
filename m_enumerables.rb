@@ -117,7 +117,7 @@ module Enumerable
   end
 
   # Regarding points 11, 12, 13. As far as I can understand, they are redundant.
-  # 11. Creating a method  multiply_els([2,4,5]) to test my_inject is straight up using inject, but 
+  # 11. Creating a method  multiply_els([2,4,5]) to test my_inject is straight up using inject, but
   #     calling the method inside this new method.
   # 11. Modify your #my_map method to take a proc instead is also redundant since you can just pass
   #     a proc to the original method by using &proc as an argument.
