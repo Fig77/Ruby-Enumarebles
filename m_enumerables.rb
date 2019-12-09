@@ -42,7 +42,7 @@ module Enumerable
 
   # bol makes this re-usable with any? and none?
 
-  def m_all?(pattern = nil, bol = false) 
+  def m_all?(pattern = nil, bol = false)
     i = 0
     ans = true
     while i < length
@@ -99,7 +99,7 @@ module Enumerable
 
   def m_inject(sum = nil, arg = nil)
     aux = to_a
-    arg.to_sym unless arg.nil?
+    arg&.to_sym
     unless sum
       sum = aux[0]
       aux = aux.drop(1)
