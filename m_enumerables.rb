@@ -33,6 +33,7 @@ module Enumerable
   end
 
   # this function is just to reduce cyclomatic complexity.
+  # will return false if the value you are looking for is not there.
 
   def all_auxiliar?(arg, pattern = nil, bol = false)
     return bol unless arg
@@ -42,6 +43,7 @@ module Enumerable
   end
 
   # bol makes this re-usable with any? and none?
+  # telling the method what to look for to return false.
 
   def m_all?(pattern = nil, bol = false)
     i = 0
@@ -49,7 +51,7 @@ module Enumerable
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
       if block_given?
-        break unless all_auxiliar?(yield(self[i]), nil, bol)
+        break unless all_auxiliar?(yield(self[0]), nil, bol)
       else
         break unless all_auxiliar?(self[i], pattern, bol)
       end
@@ -59,6 +61,9 @@ module Enumerable
     end
     ans
   end
+
+  # uses the all function to look for a true value, and instantly return true
+  # if found.
 
   def m_any?(args = nil)
     if block_given?
@@ -104,7 +109,7 @@ module Enumerable
     arg&.to_sym
     unless sum
       sum = aux[0]
-      aux = aux.drop(1)
+      aux = aux.drop(1) # placeholder solution so the first value does not compute twice.
     end
     if arg.is_a? Symbol
       aux.m_each { |i| sum = sum.send(arg, i) }
