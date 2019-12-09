@@ -40,7 +40,9 @@ module Enumerable
     !bol
   end
 
-  def m_all?(pattern = nil, bol = false) # bol makes this re-usable with any? and none?
+  # bol makes this re-usable with any? and none?
+
+  def m_all?(pattern = nil, bol = false) 
     i = 0
     ans = true
     while i < length
@@ -97,17 +99,17 @@ module Enumerable
 
   def m_inject(sum = nil, arg = nil)
     aux = to_a
-    arg.to_sym unless arg == nil
-    if !sum
+    arg.to_sym unless arg.nil?
+    unless sum
       sum = aux[0]
       aux = aux.drop(1)
     end
-    if arg.is_a? Symbol 
-       aux.m_each { |i| sum = sum.send(arg, i) }
+    if arg.is_a? Symbol
+      aux.m_each { |i| sum = sum.send(arg, i) }
     elsif block_given?
-       aux.m_each { |i| sum = (yield(sum, i)) }
+      aux.m_each { |i| sum = yield(sum, i) }
     else
-      return aux 
+      return aux
     end
 
     sum
