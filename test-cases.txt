@@ -6,20 +6,19 @@ puts [1,2,3,4,5].m_select { |num|  num.even?  }   #=> [2, 4]
 puts [:foo, :bar].m_select { |x| x == :foo }   #=> [:foo]
 
 //m_all?
-puts [].m_all?
-puts [nil, true, 99].m_all?
-puts [1, 2i, 3.14].m_all?(Numeric)
-puts %w[ant bear cat].m_all?(/t/)
-puts %w[ant bear cat].m_all? { |word| word.length >= 4 }
-puts %w[ant bear cat].m_all? { |word| word.length >= 3 }
+puts %w[ant bear cat].m_all? { |word| word.length >= 4 } #=> false
+puts %w[ant bear cat].m_all?(/t/)                        #=> false
+puts [1, 2i, 3.14].m_all?(Numeric)                       #=> true
+puts [nil, true, 99].m_all?                              #=> false
+puts [].m_all?                                           #=> true
 
 //m_any?
-%w[ant bear cat].any? { |word| word.length >= 3 }
-%w[ant bear cat].any? { |word| word.length >= 4 }
-%w[ant bear cat].any?(/d/)                        
-[nil, true, 99].any?(Integer)                    
-[nil, true, 99].any?                             
-[].any?                                           
+puts %w[ant bear cat].m_any? { |word| word.to_s.length >= 3 } #=> true
+puts %w[ant bear cat].m_any? { |word| word.to_s.length >= 4 } #=> true
+puts %w[ant bear cat].m_any?(/d/)                        #=> false
+puts [nil, true, 99].m_any?(Integer)                     #=> true
+puts [nil, true, 99].m_any?                              #=> true
+puts [].m_any?                                           #=> false                               
 
 //m_none?
 puts %w{ant bear cat}.m_none? { |word| word.to_s.length == 5 } #=> true
@@ -33,9 +32,9 @@ puts [nil, false, true].m_none?                           #=> false
 
 //m_count
 ary = [1, 2, 4, 2]
-ary.count               
-ary.count(2)            
-ary.count{ |x| x%2==0 } 
+puts ary.m_count               # => 4
+puts ary.m_count(2)            # => 2
+puts ary.m_count{ |x| x%2==0 } # => 3
 
 //m_map
 (1..4).m_map { |i| i*i } WITH BLOCK

@@ -125,11 +125,3 @@ module Enumerable
   # 12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
   #     previus point.
 end
-puts %w{ant bear cat}.m_none? { |word| word.to_s.length == 5 } #=> true
-puts %w{ant bear cat}.m_none? { |word| word.to_s.length >= 4 } #=> false
-puts %w{ant bear cat}.m_none?(/d/)                        #=> true
-puts [1, 3.14, 42].m_none?(Float)                         #=> false
-puts [].m_none?                                           #=> true
-puts [nil].m_none?                                        #=> true
-puts [nil, false].m_none?                                 #=> true
-puts [nil, false, true].m_none?                           #=> false
