@@ -38,7 +38,7 @@ module Enumerable
   def all_auxiliar?(arg, pattern = nil, bol = false)
     return bol unless arg
     return bol if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
-     
+
     !bol
   end
 
