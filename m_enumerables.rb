@@ -132,6 +132,10 @@ module Enumerable
   #     calling the method inside this new method.
   # 11. Modify your #my_map method to take a proc instead is also redundant since you can just pass
   #     a proc to the original method by using &proc as an argument.
-  # 12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
-  #     previus point.
 end
+
+# Explicit point 12. (Implicit point 12 in test cases)
+def multyply_els (arr)
+    arr.my_inject(:*)
+end
+puts multyply_els([2, 4, 5])
