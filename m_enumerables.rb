@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Enumerable
-  def m_each
-    return self unless block_given?
+  def my_each
+    return to_enum unless block_given?
 
     i = 0
     while i < length
@@ -11,8 +11,8 @@ module Enumerable
     end
   end
 
-  def m_each_with_index
-    return self unless block_given?
+  def my_each_with_index
+    return to_enum unless block_given?
 
     i = 0
     while i < length
@@ -21,7 +21,7 @@ module Enumerable
     end
   end
 
-  def m_select
+  def my_select
     return self unless block_given?
 
     new_vector = []
@@ -45,7 +45,7 @@ module Enumerable
   # bol makes this re-usable with any? and none?
   # telling the method what to look for to return false.
 
-  def m_all?(pattern = nil, bol = false)
+  def my_all?(pattern = nil, bol = false)
     i = 0
     ans = true
     while i < length
@@ -65,7 +65,7 @@ module Enumerable
   # uses the all function to look for a true value, and instantly return true
   # if found.
 
-  def m_any?(args = nil)
+  def my_any?(args = nil)
     if block_given?
       return true unless m_all?(nil, true) { yield(self) }
     else
@@ -75,11 +75,11 @@ module Enumerable
     false
   end
 
-  def m_none?(args = nil)
+  def my_none?(args = nil)
     block_given? ? m_all?(args, true) { yield(self) } : m_all?(args, true)
   end
 
-  def m_count(arg = nil)
+  def my_count(arg = nil)
     cant = 0
     i = 0
     while i < length
@@ -95,7 +95,7 @@ module Enumerable
     cant
   end
 
-  def m_map
+  def my_map
     new_arr = []
     aux = to_a
     return aux unless block_given?
@@ -104,22 +104,23 @@ module Enumerable
     new_arr
   end
 
-  def m_inject(sum = nil, arg = nil)
+  def my_inject(sum = nil, arg = nil)
     aux = to_a
-    arg&.to_sym
-    unless sum
-      sum = aux[0]
+    init = sum
+    if sum.nil? || sum.is_a?(Symbol)
+      init = aux[0]
       aux = aux.drop(1) # placeholder solution so the first value does not compute twice.
+      arg = sum
     end
     if arg.is_a? Symbol
-      aux.m_each { |i| sum = sum.send(arg, i) }
+      aux.my_each { |i| init = init.send(arg, i) }
     elsif block_given?
-      aux.m_each { |i| sum = yield(sum, i) }
+      aux.my_each { |i| init = yield(init, i) }
     else
       return aux
     end
 
-    sum
+    init
   end
 
   # Regarding points 11, 12, 13. As far as I can understand, they are redundant.
@@ -130,3 +131,4 @@ module Enumerable
   # 12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
   #     previus point.
 end
+print [1, 2, 3].my_each
