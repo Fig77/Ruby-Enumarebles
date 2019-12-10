@@ -80,7 +80,7 @@ module Enumerable
   end
 
   def my_none?(args = nil)
-    block_given? ? m_all?(args, true, &proc) : m_all?(args, true)
+    block_given? ? my_all?(args, true, &proc) : my_all?(args, true)
   end
 
   def my_count(arg = nil)
