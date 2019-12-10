@@ -55,7 +55,7 @@ module Enumerable
     while i < length
       ans = false # rubocop:disable Lint/UselessAssignment
       if block_given?
-        break unless all_auxiliar?(yield(self[0]), nil, bol)
+        break unless all_auxiliar?(yield(self[i]), nil, bol)
       else
         break unless all_auxiliar?(self[i], pattern, bol)
       end
@@ -71,16 +71,16 @@ module Enumerable
 
   def my_any?(args = nil)
     if block_given?
-      return true unless m_all?(nil, true) { yield(self) }
+      return true unless my_all?(nil, true, &proc)
     else
-      return true unless m_all?(args, true)
+      return true unless my_all?(args, true)
     end
 
     false
   end
 
   def my_none?(args = nil)
-    block_given? ? m_all?(args, true) { yield(self) } : m_all?(args, true)
+    block_given? ? m_all?(args, true, &proc) : m_all?(args, true)
   end
 
   def my_count(arg = nil)
