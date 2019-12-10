@@ -1,44 +1,45 @@
 Test cases.
 
 //m_select
-puts (1..10).m_select { |i|  i % 3 == 0 }   #=> [3, 6, 9]
-puts [1,2,3,4,5].m_select { |num|  num.even?  }   #=> [2, 4]
-puts [:foo, :bar].m_select { |x| x == :foo }   #=> [:foo]
+puts (1..10).my_select { |i|  i % 3 == 0 }   #=> [3, 6, 9]
+puts [1,2,3,4,5].my_select { |num|  num.even?  }   #=> [2, 4]
+puts [:foo, :bar].my_select { |x| x == :foo }   #=> [:foo]
 
 //m_all?
-puts %w[ant bear cat].m_all? { |word| word.length >= 4 } #=> false
-puts %w[ant bear cat].m_all?(/t/)                        #=> false
-puts [1, 2i, 3.14].m_all?(Numeric)                       #=> true
-puts [nil, true, 99].m_all?                              #=> false
-puts [].m_all?                                           #=> true
+puts %w[ant bear cat].my_all? { |word| word.length >= 4 } #=> false
+puts %w[ant bear cat].my_all?(/t/)                        #=> false
+puts [1, 2i, 3.14].my_all?(Numeric)                       #=> true
+puts [nil, true, 99].my_all?                              #=> false
+puts [].my_all?                                           #=> true
 
 //m_any?
-puts %w[ant bear cat].m_any? { |word| word.to_s.length >= 3 } #=> true
-puts %w[ant bear cat].m_any? { |word| word.to_s.length >= 4 } #=> true
-puts %w[ant bear cat].m_any?(/d/)                        #=> false
-puts [nil, true, 99].m_any?(Integer)                     #=> true
-puts [nil, true, 99].m_any?                              #=> true
+puts %w[ant bear cat].my_any? { |word| word.length >= 3 } #=> true
+puts %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
+puts %w[ant bear cat].my_any?(/d/)                        #=> false
+puts [nil, true, 99].my_any?(Integer)                     #=> true
+puts [nil, true, 99].my_any?                              #=> true
 puts [].m_any?                                           #=> false                               
 
 //m_none?
-puts %w{ant bear cat}.m_none? { |word| word.to_s.length == 5 } #=> true
-puts %w{ant bear cat}.m_none? { |word| word.to_s.length >= 4 } #=> false
-puts %w{ant bear cat}.m_none?(/d/)                        #=> true
-puts [1, 3.14, 42].m_none?(Float)                         #=> false
-puts [].m_none?                                           #=> true
-puts [nil].m_none?                                        #=> true
-puts [nil, false].m_none?                                 #=> true
-puts [nil, false, true].m_none?                           #=> false
+class DeathCab
+end
+plans = DeathCab.new()
+puts [1, 3.14, 42].my_none?(Float)  # => output false
+puts ["BY" "FIRE" "BE" "PURGED", %w[DIE INSECT].to_enum].my_none?(Enumerable)  # => output false
+puts ["With", "eyes", "like", "the", "summer", 3].my_none?(Float)  # => output true
+puts [1.12, 3.14, 3.15].my_none?(String)  # => output true
+puts [plans, plans, plans].my_none?(DeathCab)  # => output false
+OR ANY TEST CASE FROM THE RUBY DOC. OR WHATEVER.
 
 //m_count
 ary = [1, 2, 4, 2]
-puts ary.m_count               # => 4
-puts ary.m_count(2)            # => 2
-puts ary.m_count{ |x| x%2==0 } # => 3
+puts ary.my_count               # => 4
+puts ary.my_count(2)            # => 2
+puts ary.my_count{ |x| x%2==0 } # => 3
 
 //m_map
-(1..4).m_map { |i| i*i } WITH BLOCK
-(1..4).m_map { "cat"  } WITH BLOCK
+(1..4).my_map { |i| i*i } WITH BLOCK
+(1..4).my_map { "cat"  } WITH BLOCK
 proc = Proc.new { |i| i*i } -> (1..4).m_map(&proc) WITH PROC
 
 //m_inject
