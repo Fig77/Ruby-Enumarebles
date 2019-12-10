@@ -102,9 +102,9 @@ module Enumerable
   def my_map
     new_arr = []
     aux = to_a
-    return aux unless block_given?
+    return to_enum unless block_given?
 
-    aux.m_each { |i| new_arr.push(yield(i)) }
+    aux.my_each { |i| new_arr.push(yield(i)) }
     new_arr
   end
 
