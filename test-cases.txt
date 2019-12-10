@@ -42,11 +42,11 @@ puts ary.m_count{ |x| x%2==0 } # => 3
 proc = Proc.new { |i| i*i } -> (1..4).m_map(&proc) WITH PROC
 
 //m_inject
-(5..10).m_inject(:+)                             
-(5..10).m_inject { |sum, n| sum + n }
-(5..10).m_inject(1, :*)                       
-(5..10).m_inject(1) { |product, n| product * n }
-[2,4,5].m_inject(1, :*) POINT NUMBER 10
-longest = %w{ cat sheep bear }.m_inject do |memo, word|
+print (5..10).my_inject(:+)                             
+print (5..10).my_inject { |sum, n| sum + n }
+print (5..10).my_inject(1, :*)                       
+print (5..10).my_inject(1) { |product, n| product * n }
+print [2,4,5].my_inject(:*) #POINT NUMBER 10
+print longest = %w{ cat sheep bear }.my_inject do |memo, word|
    memo.length > word.length ? memo : word
 end

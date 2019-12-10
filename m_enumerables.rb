@@ -4,9 +4,10 @@ module Enumerable
   def my_each
     return to_enum unless block_given?
 
+    arr = is_a?(Array) ? self : to_a
     i = 0
     while i < length
-      yield(self[i])
+      yield(arr[i])
       i += 1
     end
   end
@@ -14,22 +15,25 @@ module Enumerable
   def my_each_with_index
     return to_enum unless block_given?
 
+    arr = is_a?(Array) ? self : to_a
     i = 0
-    while i < length
-      yield(self[i], i)
+    while i < arr.length
+      yield(arr[i], i)
       i += 1
     end
   end
 
   def my_select
-    return self unless block_given?
+    return to_enum unless block_given?
 
     new_vector = []
+    arr = is_a?(Array) ? self : to_a
     i = 0
-    while i < length
-      new_vector.push(self[i]) if yield(self[i])
+    while i < arr.length
+      new_vector.push(arr[i]) if yield(arr[i])
       i += 1
     end
+    new_vector
   end
 
   # this function is just to reduce cyclomatic complexity.
@@ -131,4 +135,3 @@ module Enumerable
   # 12. Modify your #my_map method to take either a proc or a block, also seems redundant given the
   #     previus point.
 end
-print [1, 2, 3].my_each
