@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-
+$time
 module Enumerable
+  require 'benchmark'
   def my_each
     return to_enum unless block_given?
 
@@ -39,13 +40,12 @@ module Enumerable
   # this function is just to reduce cyclomatic complexity.
   # will return false if the value you are looking for is not there.
 
-  def all_auxiliar?(arg, pattern = nil, bol = false)
+ def all_auxiliar?(arg, pattern = nil, bol = false)
     return bol unless arg
     return bol if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
 
     !bol
   end
-
   # bol makes this re-usable with any? and none?
   # telling the method what to look for to return false.
 
@@ -79,8 +79,16 @@ module Enumerable
     false
   end
 
-  def my_none?(args = nil)
-    block_given? ? my_all?(args, true, &proc) : my_all?(args, true)
+  def my_none?(args = nil, &block)
+     $time = Benchmark.measure {
+      !my_any?(args, &block)
+     }
+  end
+
+  def m_none?(args = nil)
+    $time = Benchmark.measure {
+      block_given? ? my_all?(args, true, &proc) : my_all?(args, true)
+     }
   end
 
   def my_count(arg = nil)
@@ -125,10 +133,26 @@ module Enumerable
     end
 
     init
-  end
+ end
+
+
+
 end
 
-def multyply_els(arr)
-  arr.my_inject(:*)
+class DeathCab
 end
-puts multyply_els([2, 4, 5])
+plans = DeathCab.new()
+
+puts [1, 3.14, 42].m_none?(Float)  # => output false
+puts ["BY" "FIRE" "BE" "PURGED", %w[DIE INSECT].to_enum].m_none?(Enumerable)  # => output false
+puts ["With", "eyes", "like", "the", "summer", 3].m_none?(Float)  # => output true
+puts [1.12, 3.14, 3.15].m_none?(String)  # => output true
+puts [plans, plans, plans].m_none?(DeathCab)  # => output false
+puts $time
+puts "###NEW --------------------------"
+puts [1, 3.14, 42].my_none?(Float)  # => output false
+puts ["BY" "FIRE" "BE" "PURGED", %w[DIE INSECT].to_enum].my_none?(Enumerable)  # => output false
+puts ["With", "eyes", "like", "the", "summer", 3].my_none?(Float)  # => output true
+puts [1.12, 3.14, 3.15].my_none?(String)  # => output true
+puts [plans, plans, plans].my_none?(DeathCab)  # => output false
+puts $time
