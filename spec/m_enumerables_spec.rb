@@ -14,7 +14,9 @@ describe 'Enumerable' do
       end
 
       it 'return same data with ruby each' do
-        expect([1, 2, 3, 4, 5].my_each { |num| }).to eql ([1, 2, 3, 4, 5].each { |num| })
+        output_my = [1, 2, 3, 4, 5].my_each { |num| }
+        output_each = [1, 2, 3, 4, 5].each { |num| }
+        expect(output_my).to eql output_each
       end
     end
 
@@ -70,7 +72,7 @@ describe 'Enumerable' do
         expected_output = [].my_all?
         expect(expected_output).to eql true
       end
-      it 'when no block if given, add { |obj| obj } return true when none of the collection members are false or nil.' do
+      it 'no block if given, add { |obj| obj } return true when none of the collection  false or nil.' do
         expected_output = [nil, true, 99].my_all?
         expect(expected_output).to eql false
       end
@@ -86,7 +88,7 @@ describe 'Enumerable' do
         expect(expected_output).to eql true
       end
       it 'given regex, return true if any element in the collection is true' do
-        expected_output = %w[ant bear cat].my_any? /d/
+        expected_output = %w[ant bear cat].my_any?(/d/)
         expect(expected_output).to eql false
       end
       it 'given class, return true if any element in the collection is true' do
