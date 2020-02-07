@@ -121,8 +121,7 @@ describe 'my_enumerables' do
       end
     end
   end
-end
-describe '#my_none' do
+  describe '#my_none' do
     context 'Block given with condition inside' do
       it 'Should return true if block never returns true' do
         expect(%w{ant bear cat}.my_none? { |word| word.length == 5 }).to be true
@@ -133,7 +132,7 @@ describe '#my_none' do
     context 'If pattern is supplied, returns false if pattern === element of block.' do
       it 'Should return true given pattern is not on any element' do
         expect(%w{ant bear cat}.my_none?(/d/)).to be true
-      end 
+      end
       it 'Should return false given pattern has element with pattern' do
         expect([1, 3.14, 42].my_none?(Float)).to be false
       end
@@ -146,9 +145,9 @@ describe '#my_none' do
         it 'returns false given at least one element is true' do
           expect([nil, false, true].my_none?).to be false
         end
-    end
-    end
-    end
+      end
+      end
+      end
   end
   describe '#my_count' do
     context 'Returns the number of items in enum up to argument number (if given).' do
@@ -161,14 +160,16 @@ describe '#my_none' do
       end
     end
   end
+  # rubocop:disable Lint/UnusedBlockArgument
   describe '#my_map' do
     context 'Returns a new array with the results of running block once for every element in enum' do
-      it 'should return an array with blocks result ' do 
+      it 'should return an array with blocks result ' do
         expect((1..4).my_map { |i| i * i }).to eq ((1..4).map{ |i| i * i })
         expect((1..4).my_map { 'cat' }).to eq ((1..4).map{ |i| 'cat' })
       end
     end
   end
+end
 describe '#multyply_els' do
   context 'Should return the product of all numbers in given array ' do
     it 'given array, return total product' do
@@ -179,3 +180,4 @@ end
 # rubocop:enable Style/PercentLiteralDelimiters
 # rubocop:enable Lint/ParenthesesAsGroupedExpression
 # rubocop:enable Style/EvenOdd
+# rubocop:enable Lint/UnusedBlockArgument
