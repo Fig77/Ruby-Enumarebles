@@ -103,6 +103,7 @@ describe 'my_enumerables' do
   end
   # rubocop:disable Style/PercentLiteralDelimiters
   # rubocop:disable Lint/ParenthesesAsGroupedExpression
+  # rubocop:disable Style/EvenOdd
   describe '#my_inject' do
     context 'given a symbol of an operator' do
       it 'will sume given numbers' do
@@ -156,27 +157,25 @@ describe '#my_none' do
         expect([1, 2, 4, 2].my_count(2)).to be 2
       end
       it 'Will return number of items true to a block, if block is given' do
-        expect([1, 2, 4, 2].my_count{ |x| x%2==0 }).to be 3
+        expect([1, 2, 4, 2].my_count{ |x| x % 2 == 0 }).to be 3
       end
     end
   end
   describe '#my_map' do
     context 'Returns a new array with the results of running block once for every element in enum' do
       it 'should return an array with blocks result ' do 
-        expect((1..4).my_map { |i| i*i }).to eq ((1..4).map{ |i| i*i })
+        expect((1..4).my_map { |i| i * i }).to eq ((1..4).map{ |i| i * i })
         expect((1..4).my_map { 'cat' }).to eq ((1..4).map{ |i| 'cat' })
       end
-      it 'should return an enumerator if no block is given' do
-        expect((1..4).my_map).to eq Enumerator
-      end
     end
   end
-  describe '#multyply_els' do
-    context 'Should return the product of all numbers in given array ' do
-      it 'given array, return total product' do
-        expect(multyply_els([1, 2, 3, 4, 5])).to be 120
-      end
+describe '#multyply_els' do
+  context 'Should return the product of all numbers in given array ' do
+    it 'given array, return total product' do
+      expect(multyply_els([1, 2, 3, 4, 5])).to be 120
     end
   end
+end
 # rubocop:enable Style/PercentLiteralDelimiters
 # rubocop:enable Lint/ParenthesesAsGroupedExpression
+# rubocop:enable Style/EvenOdd
