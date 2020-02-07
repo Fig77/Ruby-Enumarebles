@@ -10,6 +10,7 @@ module Enumerable
       yield(arr[i])
       i += 1
     end
+    arr
   end
 
   def my_each_with_index
