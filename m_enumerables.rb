@@ -132,4 +132,3 @@ end
 def multyply_els(arr)
   arr.my_inject(:*)
 end
-
