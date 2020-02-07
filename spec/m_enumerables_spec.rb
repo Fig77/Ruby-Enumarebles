@@ -117,4 +117,5 @@ describe 'my_enumerables' do
   			expect((%w{cat sheep bear}.my_inject { |memo, word| memo.length > word.length ? memo : word })).to eql "sheep"
   		end
   	end
+  end
 end
