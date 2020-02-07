@@ -101,8 +101,6 @@ describe 'my_enumerables' do
       end
     end
   end
-  # rubocop:disable Style/PercentLiteralDelimiters
-  # rubocop:disable Lint/ParenthesesAsGroupedExpression
   describe '#my_inject' do
     context 'given a symbol of an operator' do
       it 'will sume given numbers' do
@@ -159,12 +157,11 @@ describe 'my_enumerables' do
       end
     end
   end
-  # rubocop:disable Lint/UnusedBlockArgument
   describe '#my_map' do
     context 'Returns a new array with the results of running block once for every element in enum' do
       it 'should return an array with blocks result ' do
         expect((1..4).my_map { |i| i * i }).to eq ((1..4).map { |i| i * i })
-        expect((1..4).my_map { 'cat' }).to eq ((1..4).map { |i| 'cat' })
+        expect((1..4).my_map { 'cat' }).to eq ((1..4).map { 'cat' })
       end
     end
   end
@@ -176,7 +173,3 @@ describe '#multyply_els' do
     end
   end
 end
-# rubocop:enable Style/PercentLiteralDelimiters
-# rubocop:enable Lint/ParenthesesAsGroupedExpression
-
-# rubocop:enable Lint/UnusedBlockArgument
