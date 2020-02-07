@@ -101,9 +101,9 @@ module Enumerable
   end
 
   def my_map
+    return Enumerator unless block_given?
     new_arr = []
     aux = to_a
-    return to_enum unless block_given?
 
     aux.my_each { |i| new_arr.push(yield(i)) }
     new_arr
@@ -124,7 +124,6 @@ module Enumerable
     else
       return aux
     end
-
     init
   end
 end
@@ -132,4 +131,3 @@ end
 def multyply_els(arr)
   arr.my_inject(:*)
 end
-
