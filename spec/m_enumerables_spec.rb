@@ -69,4 +69,11 @@ describe 'm_enumerables' do
   	  end
   	end
   end
+  describe '#multyply_els' do
+  	context 'Should return the product of all numbers in given array ' do
+  		it 'given array, return total product' do
+  			expect(multyply_els([1, 2, 3, 4, 5])).to be 120
+  		end
+  	end
+  end
 end
