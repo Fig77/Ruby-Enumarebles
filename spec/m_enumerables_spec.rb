@@ -78,6 +78,32 @@ describe "Enumerable" do
        end
     end
 
+    context "#my_any?" do
+      it "return false none of the collection is true" do
+        expected_output = [2, 3, 1, 6,].my_any? { |x| x <= 0 }
+        expect(expected_output).to eql false
+        
+      end
+      it "return true if any element in the collection is true" do
+        expected_output = %w[ant bear cat].my_any? { |word| word.length >= 3 }
+        expect(expected_output).to eql true
+      end
+      it "given regex, return true if any element in the collection is true" do
+        expected_output = %w[ant bear cat].my_any? (/d/)
+        expect(expected_output).to eql false
+      end
+      it "given class, return true if any element in the collection is true" do
+        expected_output = [nil, true, 99].my_any? (Integer) 
+        expect(expected_output).to eql true
+      end
+      it "returns true if the block ever returns a value other than false or nil" do
+        expected_output = [].my_any?
+        expect(expected_output).to eql false
+      end
+      
+      
+    end
+
 
 
 
