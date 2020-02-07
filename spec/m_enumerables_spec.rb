@@ -137,14 +137,14 @@ describe 'my_enumerables' do
         expect([1, 3.14, 42].my_none?(Float)).to be false
       end
     context 'If no block nor pattern is given, return true if every is true or nil' do
-        it 'returns true if elements are false or nil' do
-          expect([].my_none?).to be true
-          expect([nil].my_none?).to be true
-          expect([nil, false].my_none?).to be true
-        end
-        it 'returns false given at least one element is true' do
-          expect([nil, false, true].my_none?).to be false
-        end
+      it 'returns true if elements are false or nil' do
+        expect([].my_none?).to be true
+        expect([nil].my_none?).to be true
+        expect([nil, false].my_none?).to be true
+      end
+      it 'returns false given at least one element is true' do
+        expect([nil, false, true].my_none?).to be false
+      end
     end
     end
     end
