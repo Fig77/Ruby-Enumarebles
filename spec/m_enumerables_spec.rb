@@ -103,7 +103,6 @@ describe 'my_enumerables' do
   end
   # rubocop:disable Style/PercentLiteralDelimiters
   # rubocop:disable Lint/ParenthesesAsGroupedExpression
-  # rubocop:disable Style/EvenOdd
   describe '#my_inject' do
     context 'given a symbol of an operator' do
       it 'will sume given numbers' do
@@ -129,24 +128,24 @@ describe 'my_enumerables' do
       it 'Should return false if every element of block is true' do
         expect(%w{ant bear cat}.my_none? { |word| word.length >= 4 }).to be false
       end
-    context 'If pattern is supplied, returns false if pattern === element of block.' do
-      it 'Should return true given pattern is not on any element' do
-        expect(%w{ant bear cat}.my_none?(/d/)).to be true
+      context 'If pattern is supplied, returns false if pattern === element of block.' do
+        it 'Should return true given pattern is not on any element' do
+          expect(%w{ant bear cat}.my_none?(/d/)).to be true
+        end
+        it 'Should return false given pattern has element with pattern' do
+          expect([1, 3.14, 42].my_none?(Float)).to be false
+        end
+        context 'If no block nor pattern is given, return true if every is true or nil' do
+          it 'returns true if elements are false or nil' do
+            expect([].my_none?).to be true
+            expect([nil].my_none?).to be true
+            expect([nil, false].my_none?).to be true
+          end
+          it 'returns false given at least one element is true' do
+            expect([nil, false, true].my_none?).to be false
+          end
+        end
       end
-      it 'Should return false given pattern has element with pattern' do
-        expect([1, 3.14, 42].my_none?(Float)).to be false
-      end
-    context 'If no block nor pattern is given, return true if every is true or nil' do
-      it 'returns true if elements are false or nil' do
-        expect([].my_none?).to be true
-        expect([nil].my_none?).to be true
-        expect([nil, false].my_none?).to be true
-      end
-      it 'returns false given at least one element is true' do
-        expect([nil, false, true].my_none?).to be false
-      end
-    end
-    end
     end
   end
   describe '#my_count' do
@@ -156,7 +155,7 @@ describe 'my_enumerables' do
         expect([1, 2, 4, 2].my_count(2)).to be 2
       end
       it 'Will return number of items true to a block, if block is given' do
-        expect([1, 2, 4, 2].my_count { |x| x % 2 == 0 }).to be 3
+        expect([1, 2, 4, 2].my_count { |x| (x % 2).zero? }).to be 3
       end
     end
   end
@@ -179,5 +178,5 @@ describe '#multyply_els' do
 end
 # rubocop:enable Style/PercentLiteralDelimiters
 # rubocop:enable Lint/ParenthesesAsGroupedExpression
-# rubocop:enable Style/EvenOdd
+
 # rubocop:enable Lint/UnusedBlockArgument
