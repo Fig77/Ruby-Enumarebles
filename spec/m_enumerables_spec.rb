@@ -145,9 +145,9 @@ describe 'my_enumerables' do
         it 'returns false given at least one element is true' do
           expect([nil, false, true].my_none?).to be false
         end
-      end
-      end
-      end
+    end
+    end
+    end
   end
   describe '#my_count' do
     context 'Returns the number of items in enum up to argument number (if given).' do
@@ -156,7 +156,7 @@ describe 'my_enumerables' do
         expect([1, 2, 4, 2].my_count(2)).to be 2
       end
       it 'Will return number of items true to a block, if block is given' do
-        expect([1, 2, 4, 2].my_count{ |x| x % 2 == 0 }).to be 3
+        expect([1, 2, 4, 2].my_count { |x| x % 2 == 0 }).to be 3
       end
     end
   end
@@ -164,8 +164,8 @@ describe 'my_enumerables' do
   describe '#my_map' do
     context 'Returns a new array with the results of running block once for every element in enum' do
       it 'should return an array with blocks result ' do
-        expect((1..4).my_map { |i| i * i }).to eq ((1..4).map{ |i| i * i })
-        expect((1..4).my_map { 'cat' }).to eq ((1..4).map{ |i| 'cat' })
+        expect((1..4).my_map { |i| i * i }).to eq ((1..4).map { |i| i * i })
+        expect((1..4).my_map { 'cat' }).to eq ((1..4).map { |i| 'cat' })
       end
     end
   end
