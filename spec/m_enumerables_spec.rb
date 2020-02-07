@@ -32,6 +32,18 @@ describe "Enumerable" do
       end
     end
 
+    context "#my_select" do
+      it "return enumerable when no block given" do
+        expect(arr_numbers.my_select).to be_an(Enumerator)
+        false
+      end
+      it "description" do
+        expected_output =arr_fruits.my_select { |fruit|
+          fruit.start_with? 'b' }
+          expect(expected_output).to eql (["banana", "bacovo", "basa"])  
+      end
+    end
+
 
     
   end
