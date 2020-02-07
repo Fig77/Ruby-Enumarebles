@@ -15,6 +15,24 @@ describe "Enumerable" do
         expect([1,2,3,4,5].my_each { |num|}).to eql ([1,2,3,4,5].each { |num|})
       end
     end
+
+    context "my_each_with_index" do
+      it "return enumerable when no block given" do
+        expect(arr_numbers.my_each_with_index).to be_an(Enumerator)
+        
+      end
+      it "return an element given its index" do
+        expected_output = []
+        arr_words.my_each_with_index { |key, idx| 
+          if idx == 1
+            expected_output.push(key.to_s)
+          end  
+        }
+        expect(expected_output).to eql (["orange"]) 
+      end
+    end
+
+
     
   end
 end
