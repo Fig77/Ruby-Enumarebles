@@ -136,7 +136,7 @@ describe 'my_enumerables' do
       it 'Should return false given pattern has element with pattern' do
         expect([1, 3.14, 42].my_none?(Float)).to be false
       end
-      context 'If no block nor pattern is given, return true if every is true or nil' do
+    context 'If no block nor pattern is given, return true if every is true or nil' do
         it 'returns true if elements are false or nil' do
           expect([].my_none?).to be true
           expect([nil].my_none?).to be true
