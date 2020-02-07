@@ -44,6 +44,42 @@ describe "Enumerable" do
       end
     end
 
+    context "#my_all?" do
+      it " returns true if the block never returns false or nil" do
+        arr1 = Array(2..9)
+        expected_output = arr1.my_all? { |x| x > 1 }
+        expect(expected_output).to  eql true
+      end
+      it " returns false if the block returns false or nil" do
+        arr2 = Array(-1..7)
+        expected_output = arr2.my_all? { |x| x > 1 }
+        expect(expected_output).to  eql false
+      end
+  
+      it "return false given a regex when any return false" do
+        expected_output = %w[ant bear cat].my_all?(/t/) 
+        expect(expected_output).to eql false
+      end
+  
+      it "return false given a class when any return false" do
+        expected_output = [1, 2, 3, 4, '5'].my_all?(Integer) 
+        expect(expected_output).to eql false
+        
+      end
+  
+      it "return true given empty array " do
+        expected_output = [].my_all?
+        expect(expected_output).to eql true
+        
+      end
+       it "when no block if given, add { |obj| obj } return true when none of the collection members are false or nil." do
+        expected_output = [nil, true, 99].my_all?
+        expect(expected_output).to eql false
+       end
+    end
+
+
+
 
     
   end
