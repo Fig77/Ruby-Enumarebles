@@ -46,7 +46,6 @@ describe 'Enumerable' do
       end
     end
 
-    # rubocop:disable Metrics/ModuleLength
     context '#my_all?' do
       it ' returns true if the block never returns false or nil' do
         arr1 = Array(2..9)
@@ -78,7 +77,6 @@ describe 'Enumerable' do
         expect(expected_output).to eql false
       end
     end
-    # rubocop:enable Metrics/ModuleLength
 
     context '#my_any?' do
       it 'return false none of the collection is true' do
