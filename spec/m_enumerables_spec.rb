@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'rspec'
 require_relative '../m_enumerables.rb'
 
-describe 'my_enumerables' do
+RSpec.describe 'my_enumerables' do
   let(:arr_numbers) { Array(1..5) }
   let(:arr_words) { %w[apple orange banana] }
   let(:arr_fruits) { %w[apple orange banana bacovo guava basa] }
@@ -13,10 +12,9 @@ describe 'my_enumerables' do
         expect([1, 2, 3, 4, 5].my_each).to be_an(Enumerator)
       end
 
-      it 'return same data with ruby each' do
+      it 'return given array' do
         output_my = [1, 2, 3, 4, 5].my_each { |num| }
-        output_each = [1, 2, 3, 4, 5].each { |num| }
-        expect(output_my).to eql output_each
+        expect(output_my).to eql [1, 2, 3, 4, 5]
       end
     end
 
@@ -163,6 +161,11 @@ describe 'my_enumerables' do
         expect([1, 2, 3, 4].my_map { |i| i * i }).to eq [1, 4, 9, 16]
         expect([1, 2, 3, 4].my_map { 'cat' }).to eq %w[cat cat cat cat]
       end
+      it "return enumerable when no block given" do
+        expect([1, 2, 3, 4, 5].my_map).to be_an(Enumerator)
+        
+      end
+      
     end
   end
 end
