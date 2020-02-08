@@ -113,7 +113,7 @@ describe 'my_enumerables' do
     context 'it can receive a block' do
       it 'given a block will return statement with said blocks instruction' do
         expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum + n }).to be 45
-        expect([5..10].my_inject { |sum, n| sum * n }).to eq ([5..10].inject { |sum, n| sum * n })
+        expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum * n }).to eq ([5, 6, 7, 8, 9, 10].inject { |sum, n| sum * n })
         expect((%w[cat sheep bear].my_inject { |memo, word| memo.length > word.length ? memo : word })).to eql 'sheep'
       end
     end
@@ -161,7 +161,7 @@ describe 'my_enumerables' do
     context 'Returns a new array with the results of running block once for every element in enum' do
       it 'should return an array with blocks result ' do
         expect([1, 2, 3, 4].my_map { |i| i * i }).to eq [1, 4, 9, 16]
-        expect([1, 2, 3, 4].my_map { 'cat' }).to eq ["cat", "cat", "cat", "cat"]
+        expect([1, 2, 3, 4].my_map { 'cat' }).to eq %w[cat cat cat cat]
       end
     end
   end
