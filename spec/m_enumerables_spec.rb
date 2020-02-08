@@ -104,31 +104,31 @@ describe 'my_enumerables' do
   describe '#my_inject' do
     context 'given a symbol of an operator' do
       it 'will sume given numbers' do
-        expect((5..10).my_inject(:+)).to eq (5..10).inject(:+)
+        expect([5..10].my_inject(:+)).to eq [5..10].inject(:+)
       end
       it 'will multiply given numbers' do
-        expect((5..10).my_inject(:*)).to eq (5..10).inject(:*)
+        expect([5..10].my_inject(:*)).to eq [5..10].inject(:*)
       end
     end
     context 'it can receive a block' do
       it 'given a block will return statement with said blocks instruction' do
-        expect((5..10).my_inject { |sum, n| sum + n }).to be 45
-        expect((5..10).my_inject { |sum, n| sum * n }).to eq ((5..10).inject { |sum, n| sum * n })
-        expect((%w{cat sheep bear}.my_inject { |memo, word| memo.length > word.length ? memo : word })).to eql 'sheep'
+        expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum + n }).to be 45
+        expect([5..10].my_inject { |sum, n| sum * n }).to eq ([5..10].inject { |sum, n| sum * n })
+        expect((['cat', 'sheep', 'bear'].my_inject { |memo, word| memo.length > word.length ? memo : word })).to eql 'sheep'
       end
     end
   end
   describe '#my_none' do
     context 'Block given with condition inside' do
       it 'Should return true if block never returns true' do
-        expect(%w{ant bear cat}.my_none? { |word| word.length == 5 }).to be true
+        expect(['ant', 'bear', 'cat'].my_none? { |word| word.length == 5 }).to be true
       end
       it 'Should return false if every element of block is true' do
-        expect(%w{ant bear cat}.my_none? { |word| word.length >= 4 }).to be false
+        expect(['ant', 'bear', 'cat'].my_none? { |word| word.length >= 4 }).to be false
       end
       context 'If pattern is supplied, returns false if pattern === element of block.' do
         it 'Should return true given pattern is not on any element' do
-          expect(%w{ant bear cat}.my_none?(/d/)).to be true
+          expect(['ant', 'bear', 'cat'].my_none?(/d/)).to be true
         end
         it 'Should return false given pattern has element with pattern' do
           expect([1, 3.14, 42].my_none?(Float)).to be false
@@ -160,8 +160,8 @@ describe 'my_enumerables' do
   describe '#my_map' do
     context 'Returns a new array with the results of running block once for every element in enum' do
       it 'should return an array with blocks result ' do
-        expect((1..4).my_map { |i| i * i }).to eq ((1..4).map { |i| i * i })
-        expect((1..4).my_map { 'cat' }).to eq ((1..4).map { 'cat' })
+        expect([1, 2, 3, 4].my_map { |i| i * i }).to eq ([1, 2, 3, 4].map { |i| i * i })
+        expect([1, 2, 3, 4].my_map { 'cat' }).to eq ([1, 2, 3, 4].map { 'cat' })
       end
     end
   end
