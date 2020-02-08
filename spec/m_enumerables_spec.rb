@@ -8,7 +8,7 @@ describe 'my_enumerables' do
   let(:arr_words) { %w[apple orange banana] }
   let(:arr_fruits) { %w[apple orange banana bacovo guava basa] }
   describe 'Given either block or array' do
-    context '#my_each' do
+    describe '#my_each' do
       it 'return enumerable when no block given' do
         expect([1, 2, 3, 4, 5].my_each).to be_an(Enumerator)
       end
@@ -20,7 +20,7 @@ describe 'my_enumerables' do
       end
     end
 
-    context 'my_each_with_index' do
+    describe 'my_each_with_index' do
       it 'return enumerable when no block given' do
         expect(arr_numbers.my_each_with_index).to be_an(Enumerator)
       end
@@ -33,7 +33,7 @@ describe 'my_enumerables' do
       end
     end
 
-    context '#my_select' do
+    describe '#my_select' do
       it 'return enumerable when no block given' do
         expect(arr_numbers.my_select).to be_an(Enumerator)
         false
@@ -46,7 +46,7 @@ describe 'my_enumerables' do
       end
     end
 
-    context '#my_all?' do
+    describe '#my_all?' do
       it ' returns true if the block never returns false or nil' do
         arr1 = Array(2..9)
         expected_output = arr1.my_all? { |x| x > 1 }
@@ -78,7 +78,7 @@ describe 'my_enumerables' do
       end
     end
 
-    context '#my_any?' do
+    describe '#my_any?' do
       it 'return false none of the collection is true' do
         expected_output = [2, 3, 1, 6].my_any? { |x| x <= 0 }
         expect(expected_output).to eql false
