@@ -113,7 +113,7 @@ describe 'my_enumerables' do
     context 'it can receive a block' do
       it 'given a block will return statement with said blocks instruction' do
         expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum + n }).to be 45
-        expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum * n }).to eq ([5, 6, 7, 8, 9, 10].inject { |sum, n| sum * n })
+        expect([5, 6, 7, 8, 9, 10].my_inject { |sum, n| sum * n }).to eq 151200
         expect((%w[cat sheep bear].my_inject { |memo, word| memo.length > word.length ? memo : word })).to eql 'sheep'
       end
     end
