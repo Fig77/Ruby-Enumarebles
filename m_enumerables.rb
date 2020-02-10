@@ -10,6 +10,7 @@ module Enumerable
       yield(arr[i])
       i += 1
     end
+    arr
   end
 
   def my_each_with_index
@@ -36,38 +37,27 @@ module Enumerable
     new_vector
   end
 
-  # this function is just to reduce cyclomatic complexity.
-  # will return false if the value you are looking for is not there.
-
   def all_auxiliar?(arg, pattern = nil, bol = false)
     return bol unless arg
-    return bol if !pattern.nil? && !(pattern === arg) # rubocop:disable Style/CaseEquality
+    return bol if !pattern.nil? && !(pattern === arg)
 
     !bol
   end
 
-  # bol makes this re-usable with any? and none?
-  # telling the method what to look for to return false.
-
   def my_all?(pattern = nil, bol = false)
     i = 0
-    ans = true
     while i < length
-      ans = false # rubocop:disable Lint/UselessAssignment
       if block_given?
-        break unless all_auxiliar?(yield(self[i]), nil, bol)
-      else
-        break unless all_auxiliar?(self[i], pattern, bol)
-      end
+        return all_auxiliar?(yield(self[i]), nil, bol) unless all_auxiliar?(yield(self[i]), nil, bol)
 
-      ans = true
+      else
+        return all_auxiliar?(self[i], pattern, bol) unless all_auxiliar?(self[i], pattern, bol)
+
+      end
       i += 1
     end
-    ans
+    true
   end
-
-  # uses the all function to look for a true value, and instantly return true
-  # if found.
 
   def my_any?(args = nil)
     if block_given?
@@ -113,7 +103,7 @@ module Enumerable
     init = sum
     if sum.nil? || sum.is_a?(Symbol)
       init = aux[0]
-      aux = aux.drop(1) # placeholder solution so the first value does not compute twice.
+      aux = aux.drop(1)
       arg = sum
     end
     if arg.is_a? Symbol
@@ -131,4 +121,3 @@ end
 def multyply_els(arr)
   arr.my_inject(:*)
 end
-puts multyply_els([2, 4, 5])
