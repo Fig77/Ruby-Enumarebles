@@ -35,7 +35,7 @@ First Ruby solo project.
 
 ### Objective
  1. Getting familiar with Ruby syntax and particularities at a surface level.
- 2. Getting a glimpse on how basic algorithm from Enumerables works.
+ 2. Getting a glimpse of how basic algorithms from Enumerables works.
  
 ### Assignment:
  
@@ -55,8 +55,8 @@ This project was built using raw Ruby.
 
 <!-- USAGE EXAMPLES -->
 ## Use
-Code in m_enumerables.rb, can be tested via console, adding the pertinent test cases on the file provided with said name. You are encourage to change the syntax of test cases and try with different combinations to properly test each algorithm.
-<strong>PLEASE</strong> provide an example of test cases used if you found an error, or a slightly detailed explanation on why any method, line or sentence is wrong.
+Code in m_enumerables.rb, can be tested via console, adding the pertinent test cases on the file provided with said name. You are encouraged to change the syntax of test cases and try with different combinations to properly test each algorithm.
+<strong>PLEASE</strong> provide an example of test cases used if you found an error, or a slightly detailed explanation on why any method, line, or sentence is wrong.
 
 <!-- ROADMAP -->
 ## Roadmap
